@@ -1,5 +1,3 @@
-import { environment } from '../../../../environments/environment';
-import { MailOptions } from '../models/mail-options';
 
 export const TEMPLATE_CFTIC_TABLE = `<table>
   <tr>
@@ -12,16 +10,14 @@ export const TEMPLATE_CFTIC_TABLE = `<table>
   <tr>\${body}</tr>
 </table>`;
 
-export const MAIL_TEMPLATE_CONSTANTS: { [id: string]: MailOptions } = {
+export type MailContentOptions = { subject: string; html: string };
+
+export const MAIL_TEMPLATE_CONSTANTS: { [id: string]: MailContentOptions } = {
   cfticEthTrackingResult: {
-    from: environment.SMTP_MAIL,
-    to: environment.SMTP_MAIL,
     subject: 'CFTIC ETH Tracking Result',
     html: TEMPLATE_CFTIC_TABLE,
   },
   cfticAwsTrackingResult: {
-    from: environment.SMTP_MAIL,
-    to: environment.SMTP_MAIL,
     subject: 'CFTIC AWS Tracking Result',
     html: TEMPLATE_CFTIC_TABLE,
   },

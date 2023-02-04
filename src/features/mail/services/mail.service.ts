@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { environment } from 'environments/environment';
+import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
 import { MAIL_CONSTANTS } from '../constants/mail-constants';
 import { MailException } from '../models/mail-exception';
@@ -9,13 +9,15 @@ import { MailOptions } from '../models/mail-options';
 export class MailService {
   private static _transporter: nodemailer.Transporter;
 
+  constructor(private configService: ConfigService) {}
+
   private getTransporter(): nodemailer.Transporter {
     if (!MailService._transporter) {
       MailService._transporter = nodemailer.createTransport({
         service: MAIL_CONSTANTS.provider,
         auth: {
-          user: environment.SMTP_MAIL,
-          pass: environment.SMTP_PASSWORD,
+          user: this.configService.get<string>('SMTP_MAIL'),
+          pass: this.configService.get<string>('SMTP_PASSWORD'),
         },
       });
     }
