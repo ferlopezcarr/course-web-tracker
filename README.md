@@ -56,6 +56,9 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+
+# deploy: Using [Fly.io](https://fly.io/)
+$ npm run deploy
 ```
 
 ## Support
